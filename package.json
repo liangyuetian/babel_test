@@ -1,0 +1,25 @@
+{
+  "name": "babel_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "babel_parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/code-frame": "^7.14.5",
+    "@babel/compat-data": "^7.15.0",
+    "@babel/core": "^7.15.5",
+    "@babel/helper-plugin-utils": "^7.14.5",
+    "@babel/parser": "^7.15.6",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/traverse": "^7.15.4",
+    "doctrine": "^3.0.0",
+    "fs-extra": "^10.0.0"
+  }
+}
