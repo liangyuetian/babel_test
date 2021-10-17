@@ -71,7 +71,6 @@ module.exports = {
 6. 插件(plugin)可以为 loader 带来更多特性。
 7. loader 能够产生额外的任意文件。
 
-
 ## 3 vue-loader
 
 如果将 vue-loader 单独拿到 webpack.config 配置的话，它应该这么写，分为 loader 和 plugin 2个部分
@@ -275,6 +274,55 @@ if (incomingQuery.type) {
 这段代码。
 然后调用 content 的callback 执行下面的流程。
 
+一亩田小程序全埋点对 template 模板的处理
+
+## 4 一亩田小程序全埋点对 template 模板的处理
+
+### 4.1 加载 loader
+```js
+module.exports = {
+   // ...
+   configureWebpack: {
+      resolveLoader: {
+         modules: [
+            "node_modules/@ymt/uni-loader-weex/lib",
+            "node_modules/@ymt/uni-clickid-generator/lib",
+         ],
+      },
+      module: {
+         rules: [
+             // ...
+            {
+               resourceQuery: /vue&type=template/,
+               use: [
+                  // ...
+                  {
+                     loader: "clickIdGenerator",
+                     query: {
+                        saKeyMappingPath: path.resolve("./", "./saKeyMapping.json"),
+                     },
+                  },
+               ],
+            }
+         ],
+      },
+   },
+   // ...
+};
+```
+
+### 4.2 解析 template
+
+使用 <code>htmlparser2</code> 库将 template 转化为ast
+
+在遍历 ast 的过程中 根据元素的属性生成 saKeyMapping.json 中的 key，并将 key 添加到 元素的 data-name 属性上，再使用ast生成代码字符串返回
+```html
+<view data-name="1b"></view>
+```
+再配合神策的全埋点，点击时候会上报点击事件，并携带元素的data-name属性，这样就可以再神策后台筛选出来。
 
 
-## 4 uni-app 对 template 的处理
+
+### 
+
+## 5 uni-app 对 template 的处理
