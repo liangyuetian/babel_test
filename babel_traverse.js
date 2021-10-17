@@ -1,5 +1,6 @@
 const ast = require('./babel_parser')
 const {default: traverse} = require('@babel/traverse')
+
 /*
 
 function traverse(parent, opts)
@@ -22,7 +23,6 @@ traverse(ast, {
   FunctionDeclaration(path, state) {}
 })
 
-// 进入 FunctionDeclaration 和 VariableDeclaration 节点时调用
 traverse(ast, {
   'FunctionDeclaration|VariableDeclaration'(path, state) {}
 })
