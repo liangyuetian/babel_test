@@ -321,8 +321,14 @@ module.exports = {
 ```
 再配合神策的全埋点，点击时候会上报点击事件，并携带元素的data-name属性，这样就可以再神策后台筛选出来。
 
-
-
-### 
-
 ## 5 uni-app 对 template 的处理
+
+主要的复杂的模板编译过程vue-loader已经做过了处理， uni-template-compiler 插件主要是做：
+1. 内置组件的自动导入
+2. 资源url和attr的
+3. v-model 等api的支持，添加全局函数，用函数包裹我们自定义的函数和属性等等
+
+在 vue-loader/lib/loaders/templateLoader.js 开始处理 template 内容的过程中，会使用到
+
+
+
